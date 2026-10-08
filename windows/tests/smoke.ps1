@@ -3,6 +3,9 @@ $package = Join-Path $PSScriptRoot '../dist/Glide'
 $helper = Join-Path $package 'glide-native-host.exe'
 $unexpected = & $helper 'chrome-extension://untrusted/'
 if ($LASTEXITCODE -ne 1 -or $unexpected) { throw 'Native helper accepted an untrusted extension or wrote unexpected output' }
+# GitHub's PowerShell wrapper propagates LASTEXITCODE at script completion.
+# The helper's intentional origin rejection was successful verification.
+$global:LASTEXITCODE = 0
 $process = Start-Process (Join-Path $package 'Glide.exe') -PassThru
 try {
     Start-Sleep -Seconds 6
