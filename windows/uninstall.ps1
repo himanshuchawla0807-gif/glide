@@ -1,5 +1,5 @@
 $ErrorActionPreference = 'Stop'
-if ((Get-Process Glide, glide-windows -ErrorAction SilentlyContinue)) { throw 'Quit Glide from its tray menu before uninstalling.' }
+if ((Get-Process Glide, glide-windows, glide-native-host -ErrorAction SilentlyContinue)) { throw 'Disable Glide Companion in Chrome and quit Glide before uninstalling.' }
 $directory = Join-Path $env:LOCALAPPDATA 'Programs/Glide'
 $registry = 'HKCU:\Software\Google\Chrome\NativeMessagingHosts\com.himanshu.glide'
 if (Test-Path $registry) {

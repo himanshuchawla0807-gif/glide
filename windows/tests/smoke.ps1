@@ -6,7 +6,12 @@ if ($LASTEXITCODE -ne 1 -or $unexpected) { throw 'Native helper accepted an untr
 # GitHub's PowerShell wrapper propagates LASTEXITCODE at script completion.
 # The helper's intentional origin rejection was successful verification.
 $global:LASTEXITCODE = 0
-$process = Start-Process (Join-Path $package 'Glide.exe') -PassThru
+$installed = Join-Path $env:LOCALAPPDATA 'Programs/Glide'
+& (Join-Path $package 'install.ps1')
+Start-Sleep -Seconds 1
+$process = Get-Process Glide -ErrorAction Stop
+if (!(Test-Path (Join-Path $installed 'Companion/manifest.json'))) { throw 'Installed companion is missing' }
+if (!(Test-Path (Join-Path ([Environment]::GetFolderPath('Programs')) 'Glide.lnk'))) { throw 'Start Menu shortcut missing' }
 try {
     Start-Sleep -Seconds 6
     $process.Refresh()
@@ -20,3 +25,7 @@ try {
     if (!$session.name.StartsWith('glide-') -or !$session.token) { throw 'Named pipe discovery missing' }
     Write-Output 'Passed Windows startup, per-user registration, local pipe discovery and extension-origin rejection'
 } finally { if (!$process.HasExited) { Stop-Process -Id $process.Id -Force } }
+
+& (Join-Path $installed 'uninstall.ps1')
+if ((Test-Path $installed) -or (Test-Path 'HKCU:\Software\Google\Chrome\NativeMessagingHosts\com.himanshu.glide')) { throw 'Uninstall did not remove the application and registration' }
+Write-Output 'Passed per-user installation and removal'

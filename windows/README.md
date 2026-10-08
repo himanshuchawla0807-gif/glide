@@ -56,6 +56,6 @@ The package is `windows/dist/Glide-Windows.zip`. Both executables must remain to
 
 If pairing stalls, leave Glide running, disable/re-enable the companion and click it again. Enterprise policy may block unpacked extensions or native messaging. Install WebView2 if missing. Moving only Glide.exe breaks its helper path; reinstall the complete package.
 
-Quit from the tray before upgrading or removing. Run `uninstall.ps1` to remove the application, Start Menu shortcut and native host registration. Remove the companion in Chrome. Preferences are retained: delete `%LOCALAPPDATA%\Glide` separately to reset them.
+Before upgrading or removing, disable Glide Companion in Chrome, then quit Glide from the tray. This releases Chrome’s native helper executable; re-enable the companion after an upgrade. Run `uninstall.ps1` to remove the application, Start Menu shortcut and native host registration. Remove the companion in Chrome. Preferences are retained: delete `%LOCALAPPDATA%\Glide` separately to reset them.
 
 MIT licensed. Report bugs with Windows version and reproduction steps, without private queries, browser data or session.json.
