@@ -190,7 +190,7 @@ fn preferences(
     profile: String,
 ) -> Result<Value, String> {
     if !["Purple", "Blue", "Black", "Graphite", "Midnight", "Rose"].contains(&theme.as_str())
-        || !valid_profile(&profile)
+        || (!profile.is_empty() && !valid_profile(&profile))
     {
         return Err(
             "Choose a valid theme and Chrome folder: Default or Profile 2, for example.".into(),
@@ -217,6 +217,9 @@ fn approve_pair(state: tauri::State<Arc<Bridge>>) -> Result<Value, String> {
         .ok_or("Click Glide Companion in your chosen Chrome profile first.")?;
     let mut s = state.settings.lock().unwrap();
     let mut next = s.clone();
+    if next.paired.as_deref() != Some(&c.profile) {
+        next.profile.clear();
+    }
     next.paired = Some(c.profile.clone());
     save_settings(&next).map_err(|e| e.to_string())?;
     *s = next;
@@ -230,6 +233,7 @@ fn unpair(state: tauri::State<Arc<Bridge>>) -> Result<Value, String> {
     let mut s = state.settings.lock().unwrap();
     let mut next = s.clone();
     next.paired = None;
+    next.profile.clear();
     save_settings(&next).map_err(|e| e.to_string())?;
     *s = next;
     drop(s);
@@ -256,7 +260,7 @@ async fn suggest(state: tauri::State<'_, Arc<Bridge>>, query: String) -> Result<
 }
 fn launch_chrome(profile: &str) -> Result<(), String> {
     if !valid_profile(profile) {
-        return Err("Invalid Chrome profile directory".into());
+        return Err("Set the Chrome profile folder in Settings before launching Chrome. Glide will not guess a profile.".into());
     }
     for base in ["PROGRAMFILES", "PROGRAMFILES(X86)", "LOCALAPPDATA"] {
         if let Some(path) = std::env::var_os(base) {

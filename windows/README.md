@@ -22,7 +22,7 @@ Windows 10 or 11 **x64**, Google Chrome, and the [Microsoft Edge WebView2 Runtim
    This policy applies to this script process only. The installer copies the complete package to `%LOCALAPPDATA%\Programs\Glide`, creates a Start Menu shortcut and launches Glide. No administrator rights needed. You can also copy the complete folder there yourself and run `Glide.exe`.
 3. In **your chosen Chrome profile**, open `chrome://extensions`, enable Developer mode, and choose **Load unpacked**. Use **Show companion** in Glide to locate `%LOCALAPPDATA%\Programs\Glide\Companion`.
 4. Click **Glide Companion** in Chrome's Extensions menu, then **Approve profile** in Glide. Approve only the profile whose companion you just clicked.
-5. Visit `chrome://version` in that profile. Find the final folder name under **Profile Path**, such as `Default` or `Profile 2`, and enter it in Settings. This lets Glide launch that profile when Chrome is closed. Do not use the full path.
+5. Visit `chrome://version` in that profile. Find the final folder name under **Profile Path**, such as `Default` or `Profile 2`, and enter it in Settings. This lets Glide launch that profile when Chrome is closed. Until you set it explicitly, Glide will not guess a profile to launch. Do not use the full path.
 6. Choose **Back to search**. Press Shift + Space whenever you want to search.
 
 Glide lives in the notification area. Its tray menu has Search, Settings and Quit. This preview does not configure launch at login: use the Start Menu shortcut after rebooting. If Shift + Space is occupied by another app, an error appears and the tray menu remains available.

@@ -21,7 +21,7 @@ impl Default for Settings {
             theme: "Purple".into(),
             google: false,
             history: false,
-            profile: "Default".into(),
+            profile: String::new(),
             paired: None,
         }
     }
@@ -140,6 +140,7 @@ mod tests {
     fn privacy_and_profiles() {
         let s = Settings::default();
         assert!(!s.google && !s.history && s.paired.is_none());
+        assert!(s.profile.is_empty());
         assert!(valid_profile("Profile 12"));
         assert!(!valid_profile("Profile 2 --remote-debugging-port=9"));
         assert!(!valid_profile("../Default"));
