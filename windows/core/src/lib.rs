@@ -145,3 +145,36 @@ mod tests {
         assert!(!valid_profile("../Default"));
     }
 }
+
+#[cfg(test)]
+mod pipe_tests {
+    use super::*;
+    use interprocess::local_socket::{prelude::*, GenericNamespaced, ListenerOptions, Stream};
+    #[test]
+    fn local_transport_round_trip() {
+        let name = format!("glide-test-{}", uuid::Uuid::new_v4());
+        let listener = ListenerOptions::new()
+            .name(name.clone().to_ns_name::<GenericNamespaced>().unwrap())
+            .create_sync()
+            .unwrap();
+        let server = std::thread::spawn(move || {
+            let stream = listener.accept().unwrap();
+            let value = read_frame(&mut &stream).unwrap();
+            assert_eq!(value["query"], "Unicode café 🌊");
+            write_frame(
+                &mut &stream,
+                &serde_json::json!({"id":value["id"],"ok":true}),
+            )
+            .unwrap();
+        });
+        let stream = Stream::connect(name.to_ns_name::<GenericNamespaced>().unwrap()).unwrap();
+        write_frame(
+            &mut &stream,
+            &serde_json::json!({"id":"test","query":"Unicode café 🌊"}),
+        )
+        .unwrap();
+        let response = read_frame(&mut &stream).unwrap();
+        assert_eq!(response, serde_json::json!({"id":"test","ok":true}));
+        server.join().unwrap();
+    }
+}

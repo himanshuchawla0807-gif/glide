@@ -1,0 +1,11 @@
+{
+  "name": "glide-windows-ui-tests",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "test": "node --test tests/ui.test.cjs"
+  },
+  "devDependencies": {
+    "jsdom": "^30.1.2"
+  }
+}

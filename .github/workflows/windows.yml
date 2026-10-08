@@ -15,6 +15,13 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
         with:
           components: rustfmt
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            windows/target
+          key: windows-rust-${{ hashFiles('windows/Cargo.lock') }}
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -25,11 +32,19 @@ jobs:
           cargo test --locked -p glide-core
       - name: Test Chrome companion
         run: node --test Tests/companion.test.mjs
+      - name: Test interface behavior
+        working-directory: windows
+        run: |
+          npm ci
+          npm test
       - name: Check frontend JavaScript
         run: node --check windows/ui/app.js
       - name: Build Windows package
         shell: pwsh
         run: ./windows/build.ps1
+      - name: Smoke test Windows executables
+        shell: pwsh
+        run: ./windows/tests/smoke.ps1
       - uses: actions/upload-artifact@v4
         with:
           name: Glide-Windows

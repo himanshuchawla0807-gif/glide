@@ -4,6 +4,10 @@ Press **Shift + Space**, type a search or URL, and open a tab in your paired Chr
 
 This edition uses a **Rust / Tauri 2 backend** and a small HTML/CSS/JavaScript interface rendered by Microsoft Edge WebView2. It runs no web server and installs no separate browser. Chrome remains your search browser. The Mac edition uses SwiftUI and AppKit.
 
+![Windows interface preview](../docs/images/Windows-preview.jpg)
+
+*Interface preview rendered on Mac; Windows uses Segoe UI and WebView2.*
+
 ## Requirements
 
 Windows 10 or 11 **x64**, Google Chrome, and the [Microsoft Edge WebView2 Runtime](https://developer.microsoft.com/en-us/microsoft-edge/webview2/). This is a preview: builds and core tests run on Windows CI, but interactive visual quality and Windows/Chrome combinations need user testing. It is unsigned; Windows may show a publisher warning. The transition affects Glide's surface; it does not blur Chrome's page or the Windows desktop.
@@ -42,6 +46,7 @@ Install stable [Rust](https://rustup.rs/), Visual Studio Build Tools with **Desk
 ```powershell
 cd windows
 cargo test --locked -p glide-core
+# Optional interface tests (requires Node.js 22+): npm ci; npm test
 .\build.ps1
 ```
 
