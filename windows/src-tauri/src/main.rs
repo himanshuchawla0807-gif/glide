@@ -64,7 +64,7 @@ fn show(app: &tauri::AppHandle, settings: bool) {
     if let Some(w) = app.get_webview_window("main") {
         let _ = w.set_size(tauri::LogicalSize::new(
             600.,
-            if settings { 530. } else { 158. },
+            if settings { 530. } else { 164. },
         ));
         let _ = w.center();
         let _ = w.show();
@@ -304,7 +304,7 @@ async fn open_query(state: tauri::State<'_, Arc<Bridge>>, input: String) -> Resu
 #[tauri::command]
 fn panel_height(app: tauri::AppHandle, height: f64) {
     if let Some(w) = app.get_webview_window("main") {
-        let _ = w.set_size(tauri::LogicalSize::new(600., height.clamp(158., 570.)));
+        let _ = w.set_size(tauri::LogicalSize::new(600., height.clamp(164., 640.)));
     }
 }
 #[tauri::command]

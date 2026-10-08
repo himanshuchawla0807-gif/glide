@@ -22,8 +22,8 @@ let state,
   shrinkTimer;
 function resize() {
   const height = $("settings").hidden
-    ? 158 + rows.length * 55 + ($("notice").hidden ? 0 : 48)
-    : 560;
+    ? 164 + rows.length * 55 + ($("notice").hidden ? 0 : 48)
+    : Math.max(530, Math.ceil(panel.getBoundingClientRect().height) + 16);
   if (height !== lastHeight) {
     lastHeight = height;
     clearTimeout(shrinkTimer);

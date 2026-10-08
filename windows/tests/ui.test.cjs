@@ -102,7 +102,7 @@ test("typing preserves the header and does not replay row entrance on each lette
     assert.equal(app.$("query").value, "he");
     assert.equal(
       app.calls.filter(
-        (c) => c.command === "panel_height" && c.args.height === 213,
+        (c) => c.command === "panel_height" && c.args.height === 219,
       ).length,
       1,
     );

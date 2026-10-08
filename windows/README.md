@@ -14,7 +14,7 @@ Windows 10 or 11 **x64**, Google Chrome, and the [Microsoft Edge WebView2 Runtim
 
 ## Install and connect
 
-1. Download **Glide-Windows.zip** from the Windows release and extract it.
+1. Download **Glide-Windows.zip** from the [Windows release](https://github.com/himanshuchawla0807-gif/glide/releases/tag/windows-v0.1.0) and extract it.
 2. Open Terminal in that folder and run:
    ```powershell
    powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1
@@ -46,7 +46,7 @@ Install stable [Rust](https://rustup.rs/), Visual Studio Build Tools with **Desk
 ```powershell
 cd windows
 cargo test --locked -p glide-core
-# Optional interface tests (requires Node.js 22+): npm ci; npm test
+# Optional interface tests (requires Node.js 22.22.2+ or 24.15+): npm ci; npm test
 .\build.ps1
 ```
 
