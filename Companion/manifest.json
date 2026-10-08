@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "Glide Companion",
+  "version": "1.3.0",
+  "description": "Local Chrome profile pairing, suggestions and new tabs for Glide.",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwn1mM38If4+1NQ/shSQxlQIqpiJzvvsNQbRF/KAh4+utPP6vssrNyH4h+xJCGcHg86elp+1Zgls/zRk1jNZqmKS/5/Ca6kdioVapCuBIo1T0Quw5SjiouXc8K1O1PsdQTAjvKiQF6h2dmMfm1JGy9fhd3fJ5o2VcJ7U58RDAVIHVwpGxN+mNRKcmh2BTPjowBHEtzcoHhv2twwvLIiFKGfxbiPewlheah1qzfjjzlF3EujivJlDym7o8Jdzkrxcyvr8JnzMPP7DAcCYCM9OZ3zjQ82V1m/8Gxfuf+wZg+08RfN9cu1KFdL5aR9pFGbDKnuH1NMgCV5WhxDc4DNMcsQIDAQAB",
+  "permissions": [
+    "nativeMessaging",
+    "history",
+    "storage",
+    "alarms"
+  ],
+  "host_permissions": [
+    "https://www.google.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_title": "Connect Glide"
+  },
+  "minimum_chrome_version": "120"
+}

@@ -1,0 +1,8 @@
+.DS_Store
+.build/
+dist/
+*.zip
+*.dmg
+*.pem
+*.key
+.env*
