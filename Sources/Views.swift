@@ -100,7 +100,7 @@ struct SearchPanelView: View {
 
             .blur(radius: model.opening ? 16 : 0)
             .animation(.easeInOut(duration: 0.38), value: model.opening)
-            .background { ZStack { (model.theme == "Purple" ? Color(red: 0.065, green: 0.05, blue: 0.095) : Color(red: 0.025, green: 0.045, blue: 0.08)); NativeMicroSlats(active: model.panelVisible, theme: model.theme) } }
+            .background { ZStack { (model.theme == "Black" ? Color.black : model.theme == "Graphite" ? Color(white: 0.065) : model.theme == "Purple" ? Color(red: 0.065, green: 0.05, blue: 0.095) : Color(red: 0.025, green: 0.045, blue: 0.08)); NativeMicroSlats(active: model.panelVisible, theme: model.theme) } }
             .clipShape(RoundedRectangle(cornerRadius: 42))
             .overlay(RoundedRectangle(cornerRadius: 42).stroke(LinearGradient(colors: [.white.opacity(0.19), .white.opacity(0.055)], startPoint: .top, endPoint: .bottom), lineWidth: 1))
             .environment(\.colorScheme, .dark)
