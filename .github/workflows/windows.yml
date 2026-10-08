@@ -1,0 +1,36 @@
+name: Windows
+on:
+  push:
+    paths: ['windows/**', 'Companion/**', 'Tests/**', '.github/workflows/windows.yml']
+  pull_request:
+    paths: ['windows/**', 'Companion/**', 'Tests/**', '.github/workflows/windows.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check formatting and core
+        working-directory: windows
+        run: |
+          cargo fmt --all --check
+          cargo test --locked -p glide-core
+      - name: Test Chrome companion
+        run: node --test Tests/companion.test.mjs
+      - name: Check frontend JavaScript
+        run: node --check windows/ui/app.js
+      - name: Build Windows package
+        shell: pwsh
+        run: ./windows/build.ps1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Glide-Windows
+          path: windows/dist/Glide-Windows.zip

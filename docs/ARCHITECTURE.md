@@ -9,3 +9,9 @@ The companion creates tabs in the paired profile's normal windows, preferring th
 History queries use the Chrome history API when enabled; Google suggestions use credentialed HTTPS fetches when enabled. HTTP/HTTPS destination validation is enforced on both sides. The app never calls developer-owned services.
 
 Public visuals are original native implementations; supplied reference video and third-party component code are excluded. The extension ID is fixed by its public manifest key. No private signing key is needed or included.
+
+## Windows preview
+
+The Windows Rust workspace lives in `windows/`. Tauri hosts the resident tray application and global shortcut. Its bundled local WebView2 interface uses CSS transitions, bounded suggestion lists and debounced requests. The shared Chrome companion routes both platforms identically. Windows native messaging uses `glide-native-host.exe`, a per-user HKCU host manifest and a random authenticated named pipe, without a TCP listener. Pending requests are matched to a connection generation so a different profile cannot answer another profile's request. Pairing requires explicit approval in Glide.
+
+The Windows UI is independently implemented; it does not reproduce the Mac desktop frosted transition. CI builds an unsigned x64 portable package. Interactive motion and Chrome integration on a physical Windows machine remain preview validation work.

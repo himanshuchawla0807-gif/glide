@@ -1,18 +1,18 @@
 # Glide
 
-A native macOS search launcher. Press **Shift + Space**, type a search or URL, and open a new tab in the Chrome profile you paired. Glide reuses an existing normal window in that profile.
+A search launcher for macOS and Windows. Press **Shift + Space**, type a search or URL, and open a new tab in the Chrome profile you paired. Glide reuses an existing normal window in that profile.
 
-Built with SwiftUI, AppKit and Core Animation. Purple, blue, black, graphite, midnight and rose appearances are available in Settings. Suggestions stay hidden until you type. The rounded panel expands downward while keeping its header stable; Enter reveals Chrome through a frosted boundary transition. Reduce Motion is respected.
+The Mac edition is built with SwiftUI, AppKit and Core Animation. A Rust / Tauri Windows preview is also available: [Windows installation and build instructions](windows/README.md). Purple, blue, black, graphite, midnight and rose appearances are available in Settings. Suggestions stay hidden until you type. The rounded panel expands downward while keeping its header stable; Enter reveals Chrome through a frosted boundary transition. Reduce Motion is respected.
 
 ![Glide search panel](docs/images/Purple.png)
 
-## Privacy first
+## Privacy
 
 Glide has **no account, backend, analytics, telemetry or developer data collection**. Pairing uses a random identifier stored locally in your Chrome profile, not your email address. Cookies stay in Chrome.
 
 Google suggestions, Chrome-history suggestions, saved Glide searches and launch-at-login are **off on a fresh installation**. You can enable each separately. When you explicitly open a search, the query goes to Google in Chrome; opening a website contacts that website. Enabling Google suggestions also sends what you type to Google using your existing Chrome session. See [Privacy](docs/PRIVACY.md) for exact data flows.
 
-## Install and connect
+## Install and connect on Mac
 
 Requires macOS 14 or newer, Google Chrome, and Apple Command Line Tools. The build targets the architecture of your Mac (Apple silicon or Intel). This is a source release: it is locally ad-hoc signed, not notarized or distributed through the Mac App Store.
 

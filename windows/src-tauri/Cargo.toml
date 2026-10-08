@@ -1,0 +1,19 @@
+[package]
+name = "glide-windows"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+default-run = "glide-windows"
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+[dependencies]
+glide-core = { path = "../core" }
+tauri = { version = "2", features = ["tray-icon"] }
+tauri-plugin-global-shortcut = "2"
+tauri-plugin-single-instance = "2"
+serde_json = "1"
+serde = { version = "1", features = ["derive"] }
+uuid = { version = "1", features = ["v4"] }
+interprocess = "2.4"
+[target.'cfg(windows)'.dependencies]
+winreg = "0.55"

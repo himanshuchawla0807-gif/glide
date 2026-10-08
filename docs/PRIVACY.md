@@ -29,3 +29,7 @@ The app writes its native-host registration to `~/Library/Application Support/Go
 Disconnect the profile in Settings. Disable saved searches and click Clear if previously enabled. Remove Glide Companion from `chrome://extensions`, quit Glide and delete the app. Optional local cleanup is described in [Setup](SETUP.md). Removing the app does not delete your normal Chrome history or Google data; manage those through Chrome/Google.
 
 The extension declares history access because history suggestions are available, even when the toggle is off. Its code requests history only when enabled. Site access is limited to `https://www.google.com/*`; there are no content scripts and no cookie permission. The companion does not inspect arbitrary page contents.
+
+## Windows preview
+
+Windows settings, paired profile identifier, native host manifest and a temporary session discovery file live under `%LOCALAPPDATA%\Glide`. The installed application normally lives in `%LOCALAPPDATA%\Programs\Glide`. Native host registration is under HKCU, without administrator permissions. The helper and app exchange framed messages over a random token-authenticated local named pipe. Other applications running as the same OS user are within the local trust boundary. There is no developer backend, telemetry, TCP listener or saved Glide query history in the Windows edition. The same opt-in Chrome-history and Google-suggestion flows apply. See [Windows setup](../windows/README.md).

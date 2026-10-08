@@ -6,3 +6,6 @@ dist/
 *.pem
 *.key
 .env*
+
+windows/target/
+windows/dist/
